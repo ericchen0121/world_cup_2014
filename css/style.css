@@ -3,4 +3,10 @@
     margin: 20px;
 }
 
+/* fixed navbar body padding */
 body { padding-top: 70px;}
+
+/* navbar */
+.active {
+  font-weight: bold;
+}
