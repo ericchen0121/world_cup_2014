@@ -3,9 +3,16 @@ App = Ember.Application.create();
 App.Router.map(function() {
   this.resource('teams');
   this.resource('players');
+  this.resource('team', { path: ':team_id'});
 });
 
 App.TeamsRoute = Ember.Route.extend({
+  model: function () {
+    return teams;
+  }
+});
+
+App.TeamRoute = Ember.Route.extend({
   model: function () {
     return teams;
   }

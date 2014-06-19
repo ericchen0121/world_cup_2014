@@ -71,7 +71,9 @@
               </thead>
               {{#each}}
               <tr><td>
-                {{name}}
+                {{#link-to 'team' this}}
+                  {{name}}
+                {{/link-to}}
               </td></tr>
               {{/each}}
             </table>
@@ -83,6 +85,13 @@
 
         </div>
       </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="team">
+    <div class="jumbotron">
+      <h1>{{name}} <small>#<b>{{groupRank}}</b> in <b>Group {{group}}</b></small></h1>
+
     </div>
   </script>
 
