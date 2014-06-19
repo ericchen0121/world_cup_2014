@@ -1,9 +1,11 @@
 App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.resource('teams');
+  this.resource('teams', function() {
+    this.resource('team', { path: ':team_id'});
+  });
+
   this.resource('players');
-  this.resource('team', { path: ':team_id'});
 });
 
 App.TeamsRoute = Ember.Route.extend({
