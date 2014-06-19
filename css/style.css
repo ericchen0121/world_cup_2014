@@ -6,7 +6,7 @@
 /* fixed navbar body padding */
 body { padding-top: 70px;}
 
-/* navbar */
+/* navbar handlebar class for active tab */
 .active {
   font-weight: bold;
 }

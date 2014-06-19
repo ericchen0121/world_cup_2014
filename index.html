@@ -26,8 +26,8 @@
     {{outlet}}
   </script>
 
-  <script type="text/x-handlebars" id="teams">
-    <div class="teams">
+  <script type="text/x-handlebars" id="players">
+    <div class="players">
       <p>This is cool!</p>
       <p>Amazeballs</p>
       <p>This is cool!</p>
@@ -59,6 +59,32 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" id="teams">
+    <div class="teams">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          {{!-- left hand nav --}}
+          <div class="span3">
+            <table class="table">
+              <thead>
+                <tr><th>World Cup Teams</th></tr>
+              </thead>
+              {{#each}}
+              <tr><td>
+                {{name}}
+              </td></tr>
+              {{/each}}
+            </table>
+          </div>
+          {{!-- right hand body --}}
+          <div class="span9">
+            {{ outlet }}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
   <script src="js/libs/handlebars-1.1.2.js"></script>
