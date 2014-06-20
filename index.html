@@ -28,34 +28,9 @@
 
   <script type="text/x-handlebars" id="players">
     <div class="players">
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
-      <p>This is cool!</p>
-      <p>Amazeballs</p>
+      {{#each}}
+        {{firstName}} {{lastName}}: {{goals}}
+      {{/each}}
     </div>
   </script>
 
