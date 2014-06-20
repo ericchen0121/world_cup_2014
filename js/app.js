@@ -1,4 +1,13 @@
-App = Ember.Application.create();
+App = Ember.Application.create({
+  // basic logging
+  LOG_TRANSITIONS: true,
+
+  // extremely detailed logging, including all internal steps
+  // 'beforeModel', 'model', 'afterModel', redirects, aborted transitions
+  // LOG_TRANSITIONS_INTERNAL: true,
+
+  LOG_VIEW_LOOKUPS: true
+});
 
 App.Router.map(function() {
   this.resource('teams', function() {
@@ -7,6 +16,7 @@ App.Router.map(function() {
 
   this.resource('players');
 });
+
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function () {
@@ -26,11 +36,20 @@ App.TeamRoute = Ember.Route.extend({
   }
 });
 
-
 App.PlayersRoute = Ember.Route.extend({
   model: function() {
     return topGoalPlayers;
   }
+});
+
+/* google analytics */
+App.Router.reopen({
+  notifyGoogleAnalytics: function() {
+    return ga('send', 'pageview', {
+      'page': this.get('url'),
+      'title': this.get('url')
+    });
+  }.on('didTransition')
 });
 
 /* World Cup API json data */
