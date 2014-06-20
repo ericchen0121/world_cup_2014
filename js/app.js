@@ -23,14 +23,14 @@ App.TeamRoute = Ember.Route.extend({
 
 App.PlayersRoute = Ember.Route.extend({
   model: function() {
-    return players;
+    return topGoalPlayers;
   }
 });
 
 /* World Cup API json data */
 var teams = $.getJSON("http://worldcup.kimonolabs.com/api/teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
 
-var players= $.getJSON("http://worldcup.kimonolabs.com/api/players?sort=goals,-1&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
+var topGoalPlayers= $.getJSON("http://worldcup.kimonolabs.com/api/players?sort=goals,-1&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
 
 
 /* Example World Cup API json response
