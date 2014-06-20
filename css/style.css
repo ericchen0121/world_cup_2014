@@ -10,3 +10,7 @@ body { padding-top: 70px;}
 .active {
   font-weight: bold;
 }
+
+.contain-fluid .row {
+  border: 20px 0px;
+}
