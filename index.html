@@ -29,8 +29,20 @@
   <script type="text/x-handlebars" id="players">
     <div class="players">
       {{#each}}
-        <div class="jumbotron">
-          <h1><img {{bind-attr src=image}} class="img-circle"> {{firstName}} {{lastName}}: {{goals}}</h1>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2 col-md-offset-2">
+              <img {{bind-attr src=image}} class="img-circle">
+            </div>
+            <div class="col-md-4">
+              <h1> {{firstName}} {{lastName}}</h1>
+              <h3><small>{{nationality}}</small></h3>
+            </div>
+            <div class="col-md-2">
+              <h1>{{goals}} <small>goals</small></h1>
+              <h4>{{penaltyGoals}} <small>penalty goals</small></h4>
+            </div>
+          </div>
         </div>
       {{/each}}
     </div>
