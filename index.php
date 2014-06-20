@@ -1,1 +1,1 @@
-<?php include_once("worldcuppr.html"); ?>
+<?php include_once("goldenboot.html"); ?>
