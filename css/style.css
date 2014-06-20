@@ -11,6 +11,6 @@ body { padding-top: 70px;}
   font-weight: bold;
 }
 
-.contain-fluid .row {
-  border: 20px 0px;
+.extra-top-padding{
+  padding-bottom: 40px;
 }
