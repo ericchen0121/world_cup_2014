@@ -8,6 +8,12 @@ App.Router.map(function() {
   this.resource('players');
 });
 
+App.IndexRoute = Ember.Route.extend({
+  redirect: function () {
+    this.transitionTo('players')
+  }
+});
+
 App.TeamsRoute = Ember.Route.extend({
   model: function () {
     return teams;
