@@ -33,11 +33,18 @@
     </nav>
 
     {{outlet}}
+
+    <div class="footer">
+      Created by @ericchen0121
+    </div>
   </script>
 
   <script type="text/x-handlebars" id="players">
+    <div class="match">
+      {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}}
+    </div>
     <div class="goldenboot">
-      {{#each}}
+      {{#each players}}
         <div class="container-fluid extra-top-padding">
           <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-2">
