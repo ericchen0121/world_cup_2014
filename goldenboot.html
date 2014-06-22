@@ -41,7 +41,8 @@
 
   <script type="text/x-handlebars" id="players">
     <div class="match center alert alert-info">
-      <img {{bind-attr src=inProgressMatch.homeFlaglogo}}> {{inProgressMatch.homeTeam.name}} {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}} {{inProgressMatch.awayTeam.name}} <img {{bind-attr src=inProgressMatch.awayFlaglogo}}> <i>{{inProgressMatch.status}}</i>
+      <h2><img {{bind-attr src=inProgressMatch.homeFlaglogo}} class="border-gold-flag"> {{inProgressMatch.homeTeam.name}} {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}} {{inProgressMatch.awayTeam.name}} <img {{bind-attr src=inProgressMatch.awayFlaglogo}} class="border-gold-flag"> </h2>
+      <i>{{inProgressMatch.status}}</i>
     </div>
     <div class="goldenboot">
       {{#each players}}

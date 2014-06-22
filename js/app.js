@@ -103,6 +103,24 @@ var addFlagToMatch = function(data) {
   };
 };
 
+// have array of all dates
+var findTodaysMatches = function(data) {
+  var today = moment(); // use moment.js library
+  for(var i = 0; i < data.length; i++){
+
+
+  };
+// find all dates that match today's date
+
+//get the first six characters of the date field of the match
+// store those matches
+// show those matches
+};
+
+
+
+// if in-progress
+
 var teamId = [
   {
     "abbreviation": "alg",
