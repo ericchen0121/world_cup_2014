@@ -62,11 +62,46 @@ var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
 var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
 
-var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
+var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return addFlagToPlayers(data);});
 
 var inProgressMatch = $.getJSON(worldcupapi + "matches?sort=currentGameMinute&limit=1&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data) {
-  return data;
+  return addFlagToMatch(data);
 });
+
+// adds FIFA flag logo url to the players array
+// data[i].teamId should be changed to data[i].id if you want this to work on the Teams
+var addFlagToPlayers = function(data) {
+  for(var i = 0; i < data.length; i++) {
+    for(var j = 0; j < teamId.length; j++) {
+      if(data[i].teamId === teamId[j].id){
+       data[i]['flaglogo'] = "http://img.fifa.com/images/flags/2/" + teamId[j].abbreviation + ".png";
+      };
+    };
+  };
+};
+
+var addFlagToTeams = function(data) {
+  for(var i = 0; i < data.length; i++) {
+    for(var j = 0; j < teamId.length; j++) {
+      if(data[i].id === teamId[j].id){
+       data[i]['flaglogo'] = "http://img.fifa.com/images/flags/2/" + teamId[j].abbreviation + ".png";
+      };
+    };
+  };
+};
+
+var addFlagToMatch = function(data) {
+  for(var j = 0; j < teamId.length; j++) {
+    if(data.homeTeamId === teamId[j].id){
+      data['homeTeam'] = teamId[j]
+      data['homeFlaglogo'] = "http://img.fifa.com/images/flags/2/" + teamId[j].abbreviation + ".png";
+    };
+    if(data.awayTeamId === teamId[j].id){
+      data['awayTeam'] = teamId[j]
+      data['awayFlaglogo'] = "http://img.fifa.com/images/flags/2/" + teamId[j].abbreviation + ".png";
+    };
+  };
+};
 
 var teamId = [
   {

@@ -18,3 +18,8 @@ body { padding-top: 70px;}
 .img-circle {
   border: 4px outset #e0cd66;
 }
+
+.img-rounded {
+  border-radius: 5px;
+  border: 2px double #e0cd66;
+}

@@ -35,26 +35,27 @@
     {{outlet}}
 
     <div class="footer">
-      Created by @ericchen0121
+      Made lovingly by @ericchen0121
     </div>
   </script>
 
   <script type="text/x-handlebars" id="players">
-    <div class="match">
-      {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}}
+    <div class="match alert alert-success">
+      {{inProgressMatch.status}}
+      <img {{bind-attr src=inProgressMatch.homeFlaglogo}}>{{inProgressMatch.homeTeam.name}}{{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}}<img {{bind-attr src=inProgressMatch.awayFlaglogo}}>{{inProgressMatch.awayTeam.name}}
     </div>
     <div class="goldenboot">
       {{#each players}}
         <div class="container-fluid extra-top-padding">
           <div class="row">
-            <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-2">
+            <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-2">
               <img {{bind-attr src=image}} class="img-circle">
             </div>
-            <div class="col-xs-12 col-sm-5 col-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-4">
               <h1>{{nickname}}</h1>
-              <h3><small>{{team.name}}</small></h3>
+              <h3><small><img {{bind-attr src=flaglogo}} class="img-rounded">  {{team.name}}</small></h3>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-3">
               <h1>{{goals}} <small>goals  / {{team.matchesPlayed}} matches</small></h1>
               <h4><small>{{penaltyGoals}} penalty goals</small></h4>
             </div>
