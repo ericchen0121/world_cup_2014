@@ -62,7 +62,7 @@ var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
 var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
 
-var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return addFlagToPlayers(data);});
+var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team,club&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return addFlagToPlayers(data);});
 
 var inProgressMatch = $.getJSON(worldcupapi + "matches?sort=currentGameMinute&limit=1&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data) {
   return addFlagToMatch(data);
