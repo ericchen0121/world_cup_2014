@@ -15,11 +15,15 @@ body { padding-top: 70px;}
   padding-bottom: 40px;
 }
 
-.img-circle {
+.border-gold {
   border: 4px outset #e0cd66;
 }
 
-.img-rounded {
+.border-gold-flag {
   border-radius: 5px;
   border: 2px double #e0cd66;
+}
+
+.center {
+  text-align: center;
 }
