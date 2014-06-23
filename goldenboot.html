@@ -40,10 +40,12 @@
   </script>
 
   <script type="text/x-handlebars" id="players">
-    <div class="match center alert alert-info">
-      <h2><img {{bind-attr src=inProgressMatch.homeFlaglogo}} class="border-gold-flag"> {{inProgressMatch.homeTeam.name}} {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}} {{inProgressMatch.awayTeam.name}} <img {{bind-attr src=inProgressMatch.awayFlaglogo}} class="border-gold-flag"> </h2>
-      <i>{{inProgressMatch.status}}</i>
-    </div>
+    {{#compare inProgressMatch.status 'In-progress'}}
+      <div class="match center alert alert-info">
+        <h2><img {{bind-attr src=inProgressMatch.homeFlaglogo}} class="border-gold-flag"> {{inProgressMatch.homeTeam.name}} {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}} {{inProgressMatch.awayTeam.name}} <img {{bind-attr src=inProgressMatch.awayFlaglogo}} class="border-gold-flag"> </h2>
+        <i>{{inProgressMatch.status}}</i>
+      </div>
+    {{/compare}}
     <div class="goldenboot">
       {{#each players}}
         <div class="container-fluid extra-top-padding">

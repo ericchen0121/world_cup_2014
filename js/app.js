@@ -57,6 +57,57 @@ App.Router.reopen({
   }.on('didTransition')
 });
 
+// /* Ember Helpers*/
+// Ember.Handlebars.helper('current-match', function(status){
+//   if(status === 'In-progress'){ return false; };
+// })
+
+/*  compare helper
+Usage: {{#compare Database.Tables.Count ">" 5}}
+There are more than 5 tables
+{{/compare}}
+*/
+
+Handlebars.registerHelper('compare', function (lvalue, operator, rvalue, options) {
+
+    var operators, result;
+
+    if (arguments.length < 3) {
+        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    }
+
+    if (options === undefined) {
+        options = rvalue;
+        rvalue = operator;
+        operator = "===";
+    }
+
+    operators = {
+        '==': function (l, r) { return l == r; },
+        '===': function (l, r) { return l === r; },
+        '!=': function (l, r) { return l != r; },
+        '!==': function (l, r) { return l !== r; },
+        '<': function (l, r) { return l < r; },
+        '>': function (l, r) { return l > r; },
+        '<=': function (l, r) { return l <= r; },
+        '>=': function (l, r) { return l >= r; },
+        'typeof': function (l, r) { return typeof l == r; }
+    };
+
+    if (!operators[operator]) {
+        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
+    }
+
+    result = operators[operator](lvalue, rvalue);
+
+    if (result) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+
+});
+
 /* World Cup API json data */
 var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
@@ -116,8 +167,6 @@ var findTodaysMatches = function(data) {
 // store those matches
 // show those matches
 };
-
-
 
 // if in-progress
 
