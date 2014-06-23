@@ -29,6 +29,7 @@
           <ul class="nav navbar-nav">
             <li>{{#link-to 'players'}}Top Scorers{{/link-to}}</a></li>
             <li>{{#link-to 'teams'}}Teams{{/link-to}}</a></li>
+            <li>{{#link-to 'about'}}About{{/link-to}}</a></li>
           </ul>
         </div>
 
@@ -105,6 +106,37 @@
         <h1><img {{bind-attr src=logo}}> </img>{{name}}</h1>
         <h2><small>#<b>{{groupRank}}</b> in <b>Group {{group}}</b></small></h2>
         <h2>{{wins}}-{{losses}}-{{draws}} | {{groupPoints}} group points</h2>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="about">
+    <div class="center">
+      <img src="https://d9hblenkye35w.cloudfront.net/media/thumbnail/ext/xl/http%253A%252F%252Fstatic.guim.co.uk%252Fsys-images%252FGuardian%252FPix%252Fpictures%252F2014%252F6%252F12%252F1402591287116%252FThomas-M-ller-of-Germany--009.jpg">
+    </div>
+    <div class="about center">
+      <h2><small>The adidas Golden Boot award goes to the top goalscorer in the FIFA World Cup.</small></h2>
+    </div>
+
+    <div class="alert alert-success center">
+      <h3>Prior World Cup Golden Boot winners:</h3>
+    </div>
+    <div class="goldenboot">
+      {{#each}}
+        <div class="container-fluid extra-top-padding">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-2">
+              <img {{bind-attr src=image}} class="img-circle border-gold">
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h1>{{name}} <i>{{year}}</i></h1>
+              <h3><small><img {{bind-attr src=flaglogo}} class="border-gold-flag">  {{teamName}}</small></h3>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3">
+              <h1>{{goals}} <small>goals</small></h1>
+            </div>
+          </div>
+        </div>
+      {{/each}}
     </div>
   </script>
 

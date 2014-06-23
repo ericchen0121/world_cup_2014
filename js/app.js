@@ -15,6 +15,7 @@ App.Router.map(function() {
   });
 
   this.resource('players');
+  this.resource('about');
 });
 
 
@@ -44,6 +45,45 @@ App.PlayersRoute = Ember.Route.extend({
       inProgressMatch: inProgressMatch
     });
     // return topGoalPlayers;
+  }
+});
+
+App.AboutRoute = Ember.Route.extend({
+  model: function() {
+    return [
+      {
+        year: "2010",
+        name: "Thomas Muller",
+        image: "images/muller-thomas-img.jpg",
+        teamName: "Germany",
+        flaglogo: "http://img.fifa.com/images/flags/2/ger.png",
+        goals: 5
+      },
+      {
+        year: "2006",
+        name: "Miroslav Klose",
+        image: "images/klose-miroslav-img.jpg",
+        teamName: "Germany",
+        flaglogo: "http://img.fifa.com/images/flags/2/ger.png",
+        goals: 5
+      },
+      {
+        year: "2002",
+        name: "Ronaldo",
+        image: "images/ronaldo-img.jpg",
+        teamName: "Brazil",
+        flaglogo: "http://img.fifa.com/images/flags/2/bra.png",
+        goals: 8
+      }
+      /*,{
+        year: "1998",
+        name: "Davor Suker",
+        image: "http://cache.images.globalsportsmedia.com/soccer/players/150x150/39105.png",
+        teamName: "Croatia",
+        flaglogo: http://img.fifa.com/images/flags/2/cro.png",
+        goals: 6
+      }*/
+    ];
   }
 });
 
