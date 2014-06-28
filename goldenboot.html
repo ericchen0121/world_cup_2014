@@ -44,12 +44,16 @@
   </script>
 
   <script type="text/x-handlebars" id="players">
-    {{#compare inProgressMatch.status 'In-progress'}}
+    {{#if inProgressMatch.status}}
       <div class="match center alert alert-info">
         <h2><img {{bind-attr src=inProgressMatch.homeFlaglogo}} class="border-gold-flag"> {{inProgressMatch.homeTeam.name}} {{inProgressMatch.homeScore}} - {{inProgressMatch.awayScore}} {{inProgressMatch.awayTeam.name}} <img {{bind-attr src=inProgressMatch.awayFlaglogo}} class="border-gold-flag"> </h2>
-        <i>{{inProgressMatch.status}}</i>
+        <i>{{inProgressMatch.status}} {{inProgressMatch.currentGameMinute}} minute</i>
       </div>
-    {{/compare}}
+    {{else}}
+      <div class="match center alert alert-info">
+        <h4>No current match, check back soon for Round of 16 action!</h4>
+      </div>
+    {{/if}}
     <div class="goldenboot">
       {{#each players}}
         <div class="container-fluid extra-top-padding">

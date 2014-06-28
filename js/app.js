@@ -97,50 +97,32 @@ App.Router.reopen({
   }.on('didTransition')
 });
 
-// /* Ember Helpers*/
-// Ember.Handlebars.helper('current-match', function(status){
-//   if(status === 'In-progress'){ return false; };
-// })
+/* http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/ */
 
-/*  compare helper
-Usage: {{#compare Database.Tables.Count ">" 5}}
-There are more than 5 tables
-{{/compare}}
-*/
+Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
 
-Handlebars.registerHelper('compare', function (lvalue, operator, rvalue, options) {
-
-    var operators, result;
-
-    if (arguments.length < 3) {
+    if (arguments.length < 3)
         throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+
+    operator = options.hash.operator || "==";
+
+    var operators = {
+        '==':       function(l,r) { return l == r; },
+        '===':      function(l,r) { return l === r; },
+        '!=':       function(l,r) { return l != r; },
+        '<':        function(l,r) { return l < r; },
+        '>':        function(l,r) { return l > r; },
+        '<=':       function(l,r) { return l <= r; },
+        '>=':       function(l,r) { return l >= r; },
+        'typeof':   function(l,r) { return typeof l == r; }
     }
 
-    if (options === undefined) {
-        options = rvalue;
-        rvalue = operator;
-        operator = "===";
-    }
+    if (!operators[operator])
+        throw new Error("Handlerbars Helper 'compare' doesn't know the operator "+operator);
 
-    operators = {
-        '==': function (l, r) { return l == r; },
-        '===': function (l, r) { return l === r; },
-        '!=': function (l, r) { return l != r; },
-        '!==': function (l, r) { return l !== r; },
-        '<': function (l, r) { return l < r; },
-        '>': function (l, r) { return l > r; },
-        '<=': function (l, r) { return l <= r; },
-        '>=': function (l, r) { return l >= r; },
-        'typeof': function (l, r) { return typeof l == r; }
-    };
+    var result = operators[operator](lvalue,rvalue);
 
-    if (!operators[operator]) {
-        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
-    }
-
-    result = operators[operator](lvalue, rvalue);
-
-    if (result) {
+    if( result ) {
         return options.fn(this);
     } else {
         return options.inverse(this);
@@ -155,8 +137,15 @@ var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89ef
 
 var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team,club&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return addFlagToPlayers(data);});
 
+
 var inProgressMatch = $.getJSON(worldcupapi + "matches?sort=currentGameMinute&limit=1&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data) {
-  return addFlagToMatch(data);
+    /* check that the game is in progress */
+    if (data.status != "In-progress") {
+      data.status = false;
+      return data;
+    } else {
+      return addFlagToMatch(data);
+    }
 });
 
 // adds FIFA flag logo url to the players array
@@ -194,6 +183,7 @@ var addFlagToMatch = function(data) {
   };
 };
 
+// in progress
 // have array of all dates
 var findTodaysMatches = function(data) {
   var today = moment(); // use moment.js library
