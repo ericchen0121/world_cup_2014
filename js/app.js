@@ -32,8 +32,8 @@ App.TeamsRoute = Ember.Route.extend({
 });
 
 App.TeamRoute = Ember.Route.extend({
-  model: function () {
-    return teams;
+  model: function(params) {
+    return team(params.team_id);
   }
 });
 
@@ -135,7 +135,18 @@ var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
 var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
 
-var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team,club&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return addFlagToPlayers(data);});
+var team = function(team_id) {
+  var value = $.getJSON(worldcupapi + "teams?id=" + team_id + "&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
+
+    return data;
+  });
+
+  return value;
+};
+
+var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team,club&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
+  return addFlagToPlayers(data);
+});
 
 
 var inProgressMatch = $.getJSON(worldcupapi + "matches?sort=currentGameMinute&limit=1&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data) {
@@ -147,6 +158,11 @@ var inProgressMatch = $.getJSON(worldcupapi + "matches?sort=currentGameMinute&li
       return addFlagToMatch(data);
     }
 });
+
+var allMatches = $.getJSON(worldcupapi + "matches?apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data) {
+
+});
+
 
 // adds FIFA flag logo url to the players array
 // data[i].teamId should be changed to data[i].id if you want this to work on the Teams
