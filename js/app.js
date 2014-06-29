@@ -102,18 +102,21 @@ App.Router.reopen({
 var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
 var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
-  return addFlagToTeams(data);
+  addFlagToTeams(data);
+  return data;
 });
 
 var team = function(team_id) {
   return $.getJSON(worldcupapi + "teams?id=" + team_id + "&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
-
-    return addFlagToTeams(data);
+    addFlagToTeams(data);
+    return data;
   });
 };
 
 var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team,club&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
-  return addFlagToPlayers(data);
+  addFlagToPlayers(data);
+  computeOrderedScore(data);
+  return data;
 });
 
 
@@ -123,7 +126,8 @@ var inProgressMatch = $.getJSON(worldcupapi + "matches?sort=currentGameMinute&li
       data.status = false;
       return data;
     } else {
-      return addFlagToMatch(data);
+      addFlagToMatch(data)
+      return data;
     }
 });
 
@@ -166,6 +170,18 @@ var addFlagToMatch = function(data) {
     };
   };
 };
+
+// sort top goal scorers by goals then assists
+// this algorithm creates a "score" property and then sorts the players array objects in descending order
+var computeOrderedScore = function(players) {
+  for(i=0; i < players.length; i++){
+    players[i]['score'] = players[i].goals + (players[i].assists * .1);
+  };
+
+  var sortedPlayers = players.sort(function(x,y){return y.score - x.score});
+  return sortedPlayers;
+};
+
 
 // in progress
 // have array of all dates
