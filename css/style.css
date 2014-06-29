@@ -33,10 +33,18 @@ body { padding-top: 70px;}
   border: 2px double #e0cd66;
 }
 
+.flag-med {
+  height: 176px;
+  width: 272px;
+}
+
 .center {
   text-align: center;
 }
 
+.right {
+  float: right;
+}
 /* overwrite bootstrap navbar */
 .navbar-default {
   background-color: #0087e6;

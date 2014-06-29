@@ -28,7 +28,7 @@ App.IndexRoute = Ember.Route.extend({
 App.TeamsRoute = Ember.Route.extend({
   model: function () {
     return teams;
-  }
+  },
 });
 
 App.TeamRoute = Ember.Route.extend({
@@ -133,15 +133,15 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
 /* World Cup API json data */
 var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
-var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){return data;});
+var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
+  return addFlagToTeams(data);
+});
 
 var team = function(team_id) {
-  var value = $.getJSON(worldcupapi + "teams?id=" + team_id + "&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
+  return $.getJSON(worldcupapi + "teams?id=" + team_id + "&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
 
-    return data;
+    return addFlagToTeams(data);
   });
-
-  return value;
 };
 
 var topGoalPlayers= $.getJSON(worldcupapi + "players?sort=goals,-1&includes=team,club&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
@@ -180,7 +180,8 @@ var addFlagToTeams = function(data) {
   for(var i = 0; i < data.length; i++) {
     for(var j = 0; j < teamId.length; j++) {
       if(data[i].id === teamId[j].id){
-       data[i]['flaglogo'] = "http://img.fifa.com/images/flags/2/" + teamId[j].abbreviation + ".png";
+        data[i]['flaglogo'] = "http://img.fifa.com/images/flags/2/" + teamId[j].abbreviation + ".png";
+        data[i]['flaglogoBig'] = "http://img.fifa.com/images/flags/5/" + teamId[j].abbreviation + ".png";
       };
     };
   };

@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li>{{#link-to 'players'}}Top Scorers{{/link-to}}</a></li>
-            <li>{{#link-to 'teams'}}Teams{{/link-to}}</a></li>
+            <li>{{#link-to 'team' '820A471B-4B85-41E8-97A6-BC3063FE78D9'}}Teams{{/link-to}}</a></li>
             <li>{{#link-to 'about'}}About{{/link-to}}</a></li>
           </ul>
         </div>
@@ -90,7 +90,7 @@
               {{#each}}
               <tr><td>
                 {{#link-to 'team' id}}
-                  {{name}}
+                  <img {{bind-attr src=flaglogo}} class="border-gold-flag"> {{name}}
                 {{/link-to}}
               </td></tr>
               {{/each}}
@@ -109,7 +109,10 @@
   <script type="text/x-handlebars" id="team">
     {{#each}}
     <div class="jumbotron">
-        <h1><img {{bind-attr src=logo}}> </img>{{name}}</h1>
+        <div id="flags">
+          <img {{bind-attr src=flaglogoBig}} class="border-gold-flag flag-med"></img><img {{bind-attr src=logo}} class="right"> </img>
+        </div>
+        <h1>{{name}}</h1>
         <h2><small>#<b>{{groupRank}}</b> in <b>Group {{group}}</b></small></h2>
         <h2>{{wins}}-{{losses}}-{{draws}} | {{groupPoints}} group points</h2>
     </div>
