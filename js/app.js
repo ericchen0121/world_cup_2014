@@ -98,7 +98,7 @@ App.Router.reopen({
 });
 
 
-/* World Cup API json data */
+/* World Cup API json data by Kimono */
 var worldcupapi = "http://worldcup.kimonolabs.com/api/";
 
 var teams = $.getJSON(worldcupapi + "teams?sort=name&apikey=ed489eaaa82064ee89efa4fc4efcf42f", function(data){
@@ -132,8 +132,7 @@ var allMatches = $.getJSON(worldcupapi + "matches?apikey=ed489eaaa82064ee89efa4f
 });
 
 
-// adds FIFA flag logo url to the players array
-// data[i].teamId should be changed to data[i].id if you want this to work on the Teams
+// adds FIFA flag logo url to players, teams and matches
 var addFlagToPlayers = function(data) {
   for(var i = 0; i < data.length; i++) {
     for(var j = 0; j < teamId.length; j++) {
@@ -185,6 +184,9 @@ var findTodaysMatches = function(data) {
 
 // if in-progress
 
+
+// to add the flag abbreviation to each team by looking up on the name
+// the abbreviation the basis for the addFlag methods
 var teamId = [
   {
     "abbreviation": "alg",
